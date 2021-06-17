@@ -1,0 +1,14 @@
+{
+    "name": "qualyteam-challenge",
+    "version": "1.0.0",
+    "description": "Qualyteam Front-end Challenge",
+    "scripts": {
+        "start": "json-server --watch db.json"
+    },
+    "keywords": [],
+    "author": "Qualyteam",
+    "license": "ISC",
+    "dependencies": {
+        "json-server": "^0.16.3"
+    }
+}
