@@ -1,0 +1,9 @@
+.content--container {
+    margin: 15px auto;
+    flex-wrap: wrap;
+    display: flex;
+    max-width: 1090px;
+    align-self: center;
+    justify-content: center;
+    align-content: center;
+}

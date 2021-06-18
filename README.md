@@ -1,13 +1,32 @@
-# API to use on front-end challenge
+# Documents front-end challenge
 
-To run this api project you should
-1. `npm install`
-2. `npm start`
+This project consists in a sample react app and a [JSON-SERVER][1] to implement Qualyteam's front-end challenge.
 
-A [JSON-SERVER][1] will be setup, feel free to fork the project and change if you feel confortable to do so, these are the default endpoints:
+To run this project you should
+1. Install the project
 
+```
+    npm install
+```
 
-### Endpoints
+2. You can start the app and server concurrently or start each one separately
+
+Run both
+```
+    npm run dev
+```
+
+Run app
+```
+    npm start
+```
+
+Run server
+```
+    npm run start-server
+```
+
+## Server Endpoints
 
 |  METHOD | ENDPOINT  | DESCRIPTION  |
 | ------------ | ------------ | ------------ |
@@ -25,8 +44,18 @@ A [JSON-SERVER][1] will be setup, feel free to fork the project and change if yo
 
 With Json Server you can [filter][2], [paginate][3] and [sort][4] your queries.
 
+## App Dependencies
+
+[Axios][5]
+
+[Reactstrap][6]
+
+[React router][7]
 
 [1]: https://github.com/typicode/json-server "json-server"
 [2]: https://github.com/typicode/json-server#filter "json-server filter"
 [3]: https://github.com/typicode/json-server#paginate "json-server paginate"
 [4]: https://github.com/typicode/json-server#sort "json-server sort"
+[5]: https://github.com/axios/axios "axios"
+[6]: https://reactstrap.github.io/ "reactstrap"
+[7]: https://reactrouter.com/web/guides/quick-start "react router"

@@ -1,14 +1,41 @@
 {
-    "name": "qualyteam-challenge",
-    "version": "1.0.0",
-    "description": "Qualyteam Front-end Challenge",
-    "scripts": {
-        "start": "json-server --watch db.json"
-    },
-    "keywords": [],
-    "author": "Qualyteam",
-    "license": "ISC",
-    "dependencies": {
-        "json-server": "^0.16.3"
-    }
+  "name": "qualyteam-challenge",
+  "version": "1.0.0",
+  "description": "Qualyteam Front-end Challenge",
+  "scripts": {
+    "dev": "concurrently \"npm start\" \"npm run start-server\"",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "start-server": "json-server db.json --port 4000"
+  },
+  "keywords": [],
+  "author": "Qualyteam",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bootstrap": "^5.0.1",
+    "json-server": "^0.16.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
+    "reactstrap": "^8.9.0"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "react-scripts": "^4.0.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
