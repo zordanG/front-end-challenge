@@ -1,10 +1,11 @@
-.navbar {
+.page-header {
     padding: 8px 16px;
+    background-color: #EEE;
 }
 
 @media (min-width: 1024px)
 {
-    .navbar {
+    .page-header {
         padding: 16px 48px;
     }
 }

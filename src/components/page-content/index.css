@@ -1,0 +1,10 @@
+.page-content {
+    padding: 16px 16px;
+}
+
+@media (min-width: 1024px)
+{
+    .page-content {
+        padding: 24px 48px;
+    }
+}
