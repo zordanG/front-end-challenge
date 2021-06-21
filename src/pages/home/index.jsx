@@ -1,16 +1,12 @@
 import React from 'react';
-import { useHistory } from 'react-router';
 
-import { Container, Row, Col, Card, CardTitle, CardText, Button } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 import PageContent from '../../components/page-content';
 import PageHeader from '../../components/page-header';
 import RouteCard from './components/route-card';
 
 export const Home = () => {
-
-    const history = useHistory();
-
     return (
         <>
             <PageHeader
