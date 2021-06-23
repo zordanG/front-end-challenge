@@ -9,9 +9,9 @@ const PageHeader = ({ title, caption }) => {
                 {title}
             </h1>
             {caption &&
-                <h7 className="page-header__caption">
+                <h6 className="page-header__caption">
                     {caption}
-                </h7>
+                </h6>
             }
         </div>
     )
