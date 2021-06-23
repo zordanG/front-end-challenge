@@ -12,8 +12,6 @@ export const DocumentDetails = (props) => {
             .catch(error => console.log(error));
     }, []);
 
-    console.log(document);
-
     return (
         <div>
             <PageHeader
