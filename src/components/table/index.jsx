@@ -1,48 +1,97 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Table as ReactstrapTable } from 'reactstrap';
+import { Button, Table as ReactstrapTable } from 'reactstrap';
 import { noop } from '@babel/types';
+import './index.css';
 
-// Expected data structure example
+// Example of use
 
-// const header = [
-//     {
-//         title: "Id",
-//         column: "id",
-//     },
-//     {
-//         title: "Description",
-//         column: "description",
-// ]
+{/* <Table
+    header={[
+        {
+            title: "A",
+            column: "a",
+        }
+    ]}
+    rows={[
+        {
+            a: "Example1"
+        }, {
+            a: "Example2"
+        }, {
+            a: "Example3"
+        }, {
+            a: "Example4"
+        }, {
+            a: "Example5"
+            onClick: () => alert(`item ${5} clicked!`)
+        }, {
+            a: "Example6"
+        },
+    ]}
+    itemsPerPage={3}
+/> */}
 
-// const rows = [
-//     {
-//         id: 1,
-//         description: "Xablau",
-//         onClick: () => { console.log(1) },
-//     },
-// ]
+const Table = ({ header, rows, itemsPerPage }) => {
 
-const Table = ({ header, rows }) => {
+    const [page, setPage] = useState(1);
+
+    const totalItems = rows.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    const handleNextPageButton = () => {
+        if (page < totalPages) {
+            setPage(page + 1);
+        }
+    };
+
+    const handlePreviousPageButton = () => {
+        if (page > 1) {
+            setPage(page - 1);
+        }
+    };
+
+    let rowsToRender;
+    if (itemsPerPage) {
+        rowsToRender = rows.slice((page - 1) * itemsPerPage, (page - 1) * itemsPerPage + itemsPerPage);
+    } else {
+        rowsToRender = rows;
+    }
+
     return (
-        <ReactstrapTable hover>
-            <thead>
-                <tr>
-                    {header.map(h => <th key={`header-${h.title}`}>{h.title}</th>)}
-                </tr>
-            </thead>
-            <tbody>
-                {rows.map(row => (
-                    <tr key={`row-${row.id}`} onClick={row.onClick || noop }>
-                        {header.map(h =>
-                            <td key={`data-${row[h.column]}`}>
-                                {row[h.column]}
-                            </td>
-                        )}
+        <div>
+            <ReactstrapTable hover>
+                <thead>
+                    <tr>
+                        {header.map((h, index) => <th key={`header-${index}`}>{h.title}</th>)}
                     </tr>
-                ))}
-            </tbody>
-        </ReactstrapTable>
+                </thead>
+                <tbody>
+                    {rowsToRender.map((row, index) => (
+                        <tr key={`row-${index}`} onClick={row.onClick || noop}>
+                            {header.map((h, index) =>
+                                <td key={`data-${index}`}>
+                                    {row[h.column]}
+                                </td>
+                            )}
+                        </tr>
+                    ))}
+                </tbody>
+            </ReactstrapTable>
+            {itemsPerPage &&
+                <div className="table-pagination">
+                    <Button onClick={handlePreviousPageButton} disabled={page === 1}>
+                        Anterior
+                    </Button>
+                    <div className="table-pagination--page-display">
+                        {page} / {totalPages}
+                    </div>
+                    <Button onClick={handleNextPageButton} disabled={page >= totalPages}>
+                        Próxima
+                    </Button>
+                </div>
+            }
+        </div>
     );
 }
 
