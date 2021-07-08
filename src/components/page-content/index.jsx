@@ -1,11 +1,13 @@
 import React from 'react';
-
+import { Container } from 'reactstrap';
 import "./index.css";
 
 const PageContent = ({ children }) => {
     return (
         <div className="page-content">
-            {children}
+            <Container fluid="lg">
+                {children}
+            </Container>
         </div>
     )
 };
