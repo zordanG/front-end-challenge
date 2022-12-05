@@ -6,6 +6,7 @@ import api from '../../api';
 import './index.css';
 import { SearchBar } from '../../components/search-bar';
 import { useHistory } from 'react-router-dom';
+import { arrangeProcesses } from '../../utils';
 
 export const MasterList = () => {
     const [documents, setDocuments] = useState({});
@@ -38,22 +39,13 @@ export const MasterList = () => {
 
     function makeTableRows() {
         documents.map((document) => {
-            let processesList = [];
-            let listLength = 0;
-
-            document.processes.map((processo) => {
-                processesList.push(processo.name + ", ");
-            })
-
-            listLength = processesList.length - 1;
-            processesList[listLength] = processesList[listLength].replace(", ", " ");
             
             tableRows.push(
                 {
                     codigo: document.code,
                     titulo: document.title,
                     data: document.published ? document["release-date"] : 'Não foi publicado',
-                    processos: processesList,
+                    processos: arrangeProcesses(document.processes),
                     onClick: () => {
                         //TODO: estudar react-router-dom
                         history.push(`/document-details/${document.id}`)

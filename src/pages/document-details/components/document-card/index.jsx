@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardSubtitle, CardText, CardHeader } from 'reactstrap';
 import './index.css'
 
-const ProcessCard = ({ code, title, published, releaseDate, active, processes }) => {
+const DocumentCard = ({ code, title, published, releaseDate, active, processes }) => {
 
     return <Card className='text-center'>
         <CardHeader tag="h3">
@@ -41,4 +41,4 @@ const ProcessCard = ({ code, title, published, releaseDate, active, processes })
     </Card>
 }
 
-export default ProcessCard;
+export default DocumentCard;
