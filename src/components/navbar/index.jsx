@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { 
     Navbar as ReactstrapNavbar,
     NavbarBrand,
@@ -24,13 +23,13 @@ export const Navbar = () => {
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="mr-auto" navbar>
                     <NavItem>
-                        <NavLink>
-                            <Link to="/">Home</Link>
+                        <NavLink href="/">
+                            Home
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink>
-                            <Link to="/list">Master List</Link>
+                        <NavLink href="/list"> 
+                            Master List
                         </NavLink>
                     </NavItem>
                 </Nav>

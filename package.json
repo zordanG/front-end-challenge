@@ -4,7 +4,7 @@
   "description": "Qualyteam Front-end Challenge",
   "scripts": {
     "dev": "concurrently \"npm start\" \"npm run start-server\"",
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",

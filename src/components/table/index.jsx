@@ -23,7 +23,7 @@ import './index.css';
         }, {
             a: "Example4"
         }, {
-            a: "Example5"
+            a: "Example5",
             onClick: () => alert(`item ${5} clicked!`)
         }, {
             a: "Example6"
@@ -68,7 +68,7 @@ const Table = ({ header, rows, itemsPerPage }) => {
                 </thead>
                 <tbody>
                     {rowsToRender.map((row, index) => (
-                        <tr key={`row-${index}`} onClick={row.onClick || noop}>
+                        <tr role="item" key={`row-${index}`} onClick={row.onClick || noop}>
                             {header.map((h, index) =>
                                 <td key={`data-${index}`}>
                                     {row[h.column]}

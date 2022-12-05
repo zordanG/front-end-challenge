@@ -1,0 +1,13 @@
+.align-right{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.input-group .btn{
+    border-radius: 0 5px 5px 0;
+}
+
+.form-control:focus{
+    box-shadow: none !important;
+}

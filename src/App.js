@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Navbar } from './components/navbar';
 import { Home } from './pages/home';
+import { MasterList } from './pages/document-masterlist';
 import { DocumentDetails } from './pages/document-details';
 
 import "./App.css"
@@ -16,7 +17,7 @@ const App = () => {
                     <Home />
                 </Route>
                 <Route path="/list" exact>
-                    <h1>Master List</h1>
+                    <MasterList />
                 </Route>
                 <Route path="/document-details/:id" exact component={DocumentDetails} />
             </Switch>
