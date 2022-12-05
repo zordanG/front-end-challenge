@@ -7,16 +7,23 @@ import './index.css';
 import { SearchBar } from '../../components/search-bar';
 import { useHistory } from 'react-router-dom';
 import { arrangeProcesses } from '../../utils';
+import { SelectFilter } from '../../components/select-filter';
 
 export const MasterList = () => {
     const [documents, setDocuments] = useState({});
     const [processes, setProcesses] = useState([]);
+    const [filterByProcess, setFilterByProcess] = useState("All");
+    const [filteredDocuments, setFilteredDocuments] = useState({});
     let tableRows = [];
     let history = useHistory();
+    let documentsToList = filterByProcess != "All" ? filteredDocuments : documents;
     
     useEffect(() => {
         api.get(`/documents`)
-            .then(response => setDocuments(response.data))
+            .then(response => {
+                setDocuments(response.data);
+                setFilteredDocuments(response.data);
+            })
             .catch(error => console.log(error));
     }, [])
 
@@ -28,6 +35,17 @@ export const MasterList = () => {
             .catch(error => console.log(error));
     }, [])
 
+    useEffect(() => {
+        if(filterByProcess != "All"){
+            setFilteredDocuments(documents.filter((document) => {
+                let validatedProcess = document.processes.filter((process) => {
+                    return process.name == filterByProcess;
+                })
+                return validatedProcess.length > 0
+            }));
+        }
+    }, [filterByProcess])
+
     function searchDocument(search) {
         search = search.trim();
         api.get(`/documents?q=${search}`)
@@ -38,8 +56,7 @@ export const MasterList = () => {
     }
 
     function makeTableRows() {
-        documents.map((document) => {
-            
+        documentsToList.map((document) => {
             tableRows.push(
                 {
                     codigo: document.code,
@@ -89,13 +106,7 @@ export const MasterList = () => {
             />
             <PageContent>
                 <SearchBar function={searchDocument}/>
-                {/* <form>
-                    <select name="processos">
-                        {processes && processes.map((process) => {
-                                return <option key={}>{process.name}</option>})
-                        }
-                    </select>
-                </form> */}
+                <SelectFilter selectItems={processes} inicialValue={filterByProcess} function={setFilterByProcess}></SelectFilter>
                 {documents && documents.length > 0 ? renderDocumentsTable() : <p>Informação não encontrada</p>}
             </PageContent>
         </>
