@@ -59,7 +59,7 @@ const Table = ({ header, rows, itemsPerPage }) => {
     }
 
     return (
-        <div>
+        <div data-testid="masterlist">
             <ReactstrapTable hover>
                 <thead>
                     <tr>
@@ -68,7 +68,7 @@ const Table = ({ header, rows, itemsPerPage }) => {
                 </thead>
                 <tbody>
                     {rowsToRender.map((row, index) => (
-                        <tr role="item" key={`row-${index}`} onClick={row.onClick || noop}>
+                        <tr role={`item-${index}`} key={`row-${index}`} onClick={row.onClick || noop}>
                             {header.map((h, index) =>
                                 <td key={`data-${index}`}>
                                     {row[h.column]}

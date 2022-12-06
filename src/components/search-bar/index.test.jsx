@@ -4,19 +4,21 @@ import { SearchBar } from '.';
 
 describe('SearchBar', () => {
 
-    it('should render searchbar', async () => {
+    it('should render searchbar', () => {
         render(<SearchBar />);
         
-        expect(await screen.findByTestId("searchbar")).toBeInTheDocument();
+        expect(screen.queryByTestId("searchbar")).toBeInTheDocument();
     })
 
-    it('should execute function onSubmit', async () => {
-        let counter = 0;
+    it('should return the text onClick', async () => {
+        let finalText = "";
 
-        render(<SearchBar function={counter++}/>);
-        fireEvent.submit(screen.getByPlaceholderText("Pesquisa..."));
+        render(<SearchBar function={(text) => finalText = text}/>);
 
-        expect(counter).toBe(1);
+        fireEvent.change(screen.getByPlaceholderText("Pesquisa..."), {target: { value: "ASD"}})
+        expect(finalText).toBe("");
+        fireEvent.click(screen.getByTestId("search"));
+        expect(finalText).toBe("ASD");
     })
 
 });

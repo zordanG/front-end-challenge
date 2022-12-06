@@ -65,18 +65,18 @@ describe('Table', () => {
             itemsPerPage={3}/>);
         
         expect(await screen.findByText("Código")).toBeInTheDocument();
-        expect(await screen.findByText("Título")).toBeInTheDocument();
-        expect(await screen.findByText("PO001")).toBeInTheDocument();
-        expect(await screen.findByText("Safety and mission assurance")).toBeInTheDocument();
-        expect(await screen.findByText("PO002")).toBeInTheDocument();
-        expect(await screen.findByText("Software assurance research program")).toBeInTheDocument();
-        expect(await screen.findByText("PO003")).toBeInTheDocument();
-        expect(await screen.findByText("Administrative controls")).toBeInTheDocument();
+        expect(screen.getByText("Título")).toBeInTheDocument();
+        expect(screen.getByText("PO001")).toBeInTheDocument();
+        expect(screen.getByText("Safety and mission assurance")).toBeInTheDocument();
+        expect(screen.getByText("PO002")).toBeInTheDocument();
+        expect(screen.getByText("Software assurance research program")).toBeInTheDocument();
+        expect(screen.getByText("PO003")).toBeInTheDocument();
+        expect(screen.getByText("Administrative controls")).toBeInTheDocument();
         expect(screen.queryByText("PO004")).not.toBeInTheDocument();
         expect(screen.queryByText("Document control")).not.toBeInTheDocument();
-        expect(await screen.findByText("Anterior")).toBeInTheDocument();
-        expect(await screen.findByText("Próxima")).toBeInTheDocument();
-        expect(await screen.findByText("1 / 2")).toBeInTheDocument();
+        expect(screen.getByText("Anterior")).toBeInTheDocument();
+        expect(screen.getByText("Próxima")).toBeInTheDocument();
+        expect(screen.getByText("1 / 2")).toBeInTheDocument();
     })
 
     it('should execute function onClick', async () => {

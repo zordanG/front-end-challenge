@@ -15,7 +15,7 @@ export const SearchBar = (props) => {
             <InputGroup>
                 <Input placeholder="Pesquisa..." onChange={(event) => text = event.target.value }/>
                 <InputGroupAddon addonType="append">
-                    <Button type="submit" onClick={() => props.function(text)}>
+                    <Button data-testid="search" type="submit" onClick={() => props.function(text)}>
                         <ion-icon name="search-outline"></ion-icon>
                     </Button>
                 </InputGroupAddon>
