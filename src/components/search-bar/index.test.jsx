@@ -15,7 +15,7 @@ describe('SearchBar', () => {
 
         render(<SearchBar function={(text) => finalText = text}/>);
 
-        fireEvent.change(screen.getByPlaceholderText("Pesquisa..."), {target: { value: "ASD"}})
+        fireEvent.input(screen.getByPlaceholderText("Pesquisa..."), {target: { value: "ASD"}})
         expect(finalText).toBe("");
         fireEvent.click(screen.getByTestId("search"));
         expect(finalText).toBe("ASD");

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen, act, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import AxiosMockAdapter from 'axios-mock-adapter';
 import { MasterList } from '.';
 import api from '../../api';
@@ -60,7 +60,9 @@ describe('Masterlist', () => {
     beforeEach(() => {
         mock = new AxiosMockAdapter(api);
 
-        mock.onGet(/.*\/documents.*/).reply(200, mockedDocuments);
+        mock.onGet("/documents").reply(200, mockedDocuments);
+        mock.onGet("/documents?q=asd").reply(200, []);
+        mock.onGet("/documents?q=sales").reply(200, [mockedDocuments[1]]);
         mock.onGet(/.*\/processes.*/).reply(200, processes);
     })
 
@@ -72,4 +74,31 @@ describe('Masterlist', () => {
         expect(screen.getByTestId("selectfilter")).toBeInTheDocument();
         expect(screen.getByTestId("masterlist")).toBeInTheDocument();
     });
+    
+    it('should filter by selection', async () => {
+        let items;
+
+        render(<MasterList />);
+        expect(await screen.findByText("Lista de Documentos")).toBeInTheDocument();
+        
+        items = await screen.findAllByRole(/item/i);
+        expect(items.length).toBe(2);
+        
+        fireEvent.change(screen.getByTestId("selectfilter"), {target: {value: "Sales"}});
+        items = await screen.findAllByRole(/item/i);
+        expect(items.length).toBe(1);
+    });
+    
+    it('should return a message if search is not found', async () => {
+        render(<MasterList />);
+        expect(await screen.findByText("Lista de Documentos")).toBeInTheDocument();
+        
+        fireEvent.input(await screen.findByPlaceholderText("Pesquisa..."), {target: {value: "asd"}});
+        fireEvent.click(await screen.findByTestId("search"));
+        
+        expect(await screen.findByText("Informação não encontrada")).toBeInTheDocument();
+    });
+    
+    //TODO: return search
+    //TODO: onClick navigation
 });

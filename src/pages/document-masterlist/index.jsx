@@ -19,24 +19,34 @@ export const MasterList = () => {
     let documentsToList = filterByProcess != "All" ? filteredDocuments : documents;
     
     useEffect(() => {
+        let isMounted = true;
         api.get(`/documents`)
             .then(response => {
-                setDocuments(response.data);
-                setFilteredDocuments(response.data);
+                if(isMounted == true) {
+                    setDocuments(response.data);
+                    setFilteredDocuments(response.data);
+                }
             })
             .catch(error => console.log(error));
+
+        return () => isMounted = false
     }, [])
 
     useEffect(() => {
+        let isMounted = true;
         api.get(`/processes`)
             .then(response => {
-                setProcesses(response.data);
+                if(isMounted == true) {
+                    setProcesses(response.data);
+                }
             })
             .catch(error => console.log(error));
+            
+        return () => isMounted = false
     }, [])
 
     useEffect(() => {
-        if(filterByProcess != "All"){
+        if(filterByProcess != "All" && documents.length > 0){
             setFilteredDocuments(documents.filter((document) => {
                 let validatedProcess = document.processes.filter((process) => {
                     return process.name == filterByProcess;
@@ -49,10 +59,10 @@ export const MasterList = () => {
     function searchDocument(search) {
         search = search.trim();
         api.get(`/documents?q=${search}`)
-            .then(response => {
-                setDocuments(response.data);
-            })
-            .catch(error => console.log(error));
+        .then(response => {
+            setDocuments(response.data);
+        })
+        .catch(error => console.log(error));
     }
 
     function makeTableRows() {
